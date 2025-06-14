@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed := 600.0
+@export var speed := 400.0
 var direction: Vector2 = Vector2.ZERO
 @onready var kill_sfx: AudioStreamPlayer2D = $KillSFX
 

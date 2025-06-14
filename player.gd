@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed := 300.0
 @export var shot_scene: PackedScene
+@onready var pp: Marker2D = $PP
 
 var player_facing_dir = Vector2.UP
 signal player_died
@@ -40,7 +41,8 @@ func _physics_process(delta):
 func shoot():
 	var shot = shot_scene.instantiate()
 	shot_sfx.play()
-	shot.position = global_position + player_facing_dir * 20
+	shot.global_position = pp.global_position
+	##shot.position = global_position + player_facing_dir * 20
 	shot.set_direction(player_facing_dir)
 	get_parent().add_child(shot)
 	# Connect enemy hit signal from shot to main

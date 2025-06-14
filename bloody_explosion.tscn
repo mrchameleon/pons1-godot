@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmibh05g2dvwa"]
+
+[ext_resource type="Script" uid="uid://cvvxl6j8j1l5f" path="res://bloody_explosion.gd" id="1_180eu"]
+[ext_resource type="Texture2D" uid="uid://ck8lwqv5lh7yj" path="res://blood.jpg" id="2_7r54y"]
+
+[sub_resource type="Gradient" id="Gradient_7r54y"]
+offsets = PackedFloat32Array(0, 0.503788, 1)
+colors = PackedColorArray(0.607843, 0, 0, 1, 1, 0.0588235, 0.0588235, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cilva"]
+gradient = SubResource("Gradient_7r54y")
+
+[sub_resource type="Curve" id="Curve_7r54y"]
+_data = [Vector2(0.0344828, 0.413258), 0.0, 0.0, 0, 0, Vector2(0.413793, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cilva"]
+curve = SubResource("Curve_7r54y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7r54y"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.856
+spread = 180.0
+initial_velocity_min = 156.7
+initial_velocity_max = 156.7
+gravity = Vector3(0, 600, 0)
+scale_min = 0.3
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_cilva")
+color_ramp = SubResource("GradientTexture1D_cilva")
+
+[node name="BloodyExplosion" type="Node2D"]
+script = ExtResource("1_180eu")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("2_7r54y")
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7r54y")

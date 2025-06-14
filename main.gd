@@ -2,6 +2,8 @@ extends Node2D
 
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene
+@export var splat: PackedScene
+@export var blood_scene: PackedScene
 
 @onready var play_button: Button = $"../Control/PlayButton"
 @onready var play_again: Button = $"../Control/PlayAgain"
@@ -94,6 +96,15 @@ func start_game():
 
 func _on_shot_enemy_hit(enemy: Node):
 	if enemy and enemy.is_inside_tree():
+		var blood = blood_scene.instantiate()
+		blood.global_position = enemy.global_position
+		get_tree().current_scene.add_child(blood)
+			
+		var poo = splat.instantiate()
+		add_child(poo)
+		poo.global_position = enemy.global_position
+		
+		
 		enemy_die.play()
 		score += 1
 		in_game_kills.text = "Kills: %d" % score
@@ -120,6 +131,7 @@ func spawn_wave():
 		add_child(enemy)
 		enemy.position = get_random_spawn_position()
 		enemy.connect("enemy_died", Callable(self, "_on_enemy_died"))
+
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
 	enemy.set_player(player_ref)
