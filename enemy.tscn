@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkun5tnsug6pu"]
+
+[ext_resource type="Script" uid="uid://jl3btn5myw6n" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://cdtr3v75io8qh" path="res://nazi.png" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(26, 19)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7k104")
