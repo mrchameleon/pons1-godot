@@ -38,8 +38,10 @@ color_ramp = SubResource("GradientTexture1D_cilva")
 script = ExtResource("1_180eu")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
 amount = 100
 texture = ExtResource("2_7r54y")
+one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_7r54y")
