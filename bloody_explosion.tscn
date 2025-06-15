@@ -18,12 +18,17 @@ point_count = 2
 curve = SubResource("Curve_7r54y")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7r54y"]
+lifetime_randomness = 0.78
 particle_flag_disable_z = true
+angle_min = -529.7
+angle_max = -140.7
 inherit_velocity_ratio = 0.856
 spread = 180.0
 initial_velocity_min = 156.7
-initial_velocity_max = 156.7
-gravity = Vector3(0, 600, 0)
+initial_velocity_max = 346.36
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -71.27
+radial_accel_max = 50.58
 scale_min = 0.3
 scale_max = 0.7
 scale_curve = SubResource("CurveTexture_cilva")
@@ -33,10 +38,8 @@ color_ramp = SubResource("GradientTexture1D_cilva")
 script = ExtResource("1_180eu")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
 amount = 100
 texture = ExtResource("2_7r54y")
-lifetime = 1.2
-one_shot = true
 explosiveness = 1.0
+randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_7r54y")

@@ -31,12 +31,22 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("shoot"):
 		shoot()
+	var look_dir
+	if Input.get_connected_joypads().size() > 0:
+		var aim_vector = Vector2.ZERO
+		aim_vector.x = Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left")
+		aim_vector.y = Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
 
-	# Rotate to face mouse
-	var mouse_pos = get_global_mouse_position()
-	var look_dir = (mouse_pos - global_position).normalized()
-	player_facing_dir = look_dir
-	rotation = look_dir.angle() + PI/2
+		if aim_vector.length() > 0: # Ensure the stick is not at the deadzone
+			look_dir = aim_vector # Rotate your object to face the direction of the aim vector
+			player_facing_dir = look_dir
+			rotation = look_dir.angle() + PI/2
+	else:
+		# Rotate to face mouse
+		var mouse_pos = get_global_mouse_position()
+		look_dir = (mouse_pos - global_position).normalized()
+		player_facing_dir = look_dir
+		rotation = look_dir.angle() + PI/2
 
 func shoot():
 	var shot = shot_scene.instantiate()
