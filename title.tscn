@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://swbacfmle6gi"]
+[gd_scene load_steps=5 format=3 uid="uid://swbacfmle6gi"]
+
+[ext_resource type="Texture2D" uid="uid://bq4djxhc3xcou" path="res://Title_Temp.png" id="1_y7k74"]
+[ext_resource type="AudioStream" uid="uid://bdysq5dui1drb" path="res://banner.mp3" id="2_oyqm6"]
 
 [sub_resource type="GDScript" id="GDScript_06r0y"]
 script/source = "extends Control
@@ -8,9 +11,11 @@ signal play
 
 
 func _on_button_pressed() -> void:
-	button.visible = false
-	emit_signal(\"play\")
+	get_tree().change_scene_to_file(\"res://main.tscn\")
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7k74"]
+bg_color = Color(0, 0.556863, 0.54902, 0.0627451)
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -21,13 +26,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_06r0y")
 
-[node name="Button" type="Button" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 422.0
-offset_top = 243.0
-offset_right = 572.0
-offset_bottom = 352.0
-theme_override_font_sizes/font_size = 99
-text = "Play"
+offset_left = -41.0
+offset_right = 1226.0
+offset_bottom = 683.0
+texture = ExtResource("1_y7k74")
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 486.0
+offset_right = 723.0
+offset_bottom = 583.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y7k74")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_right = 252.0
+offset_bottom = 100.0
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 265.0
+offset_right = 633.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 24
+text = "DEMO v0.1"
+
+[node name="TitleSong" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_oyqm6")
+autoplay = true
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]

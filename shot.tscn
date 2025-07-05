@@ -15,8 +15,8 @@ script = ExtResource("1_3ldfn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3ldfn")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
-texture = ExtResource("1_awion")
-
 [node name="KillSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_f4qg3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_awion")

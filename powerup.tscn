@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bexmnhgjp31tq"]
+
+[ext_resource type="Script" uid="uid://blwpa2yuo7gvt" path="res://powerup.gd" id="1_wh0le"]
+[ext_resource type="Texture2D" uid="uid://kq0ajubsap2t" path="res://powerup_yellow.png" id="2_wh0le"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wh0le"]
+size = Vector2(11, 18)
+
+[node name="Powerup" type="Area2D"]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_wh0le")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_wh0le")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wh0le")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -41.0
+offset_top = -27.0
+offset_right = 68.0
+offset_bottom = -4.0
+theme_override_font_sizes/font_size = 12

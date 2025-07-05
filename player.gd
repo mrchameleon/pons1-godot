@@ -4,14 +4,36 @@ extends CharacterBody2D
 @export var shot_scene: PackedScene
 @onready var pp: Marker2D = $PP
 
+var shot_color = Color8(255, 255, 0, 128)
+@onready var camera: Camera2D = $Camera2D
+
+@export var pee_speed := 180.0
+@export var pee_lifetime := 0.4 # seconds
+
+var pee_speed_modifier := .25
+var pee_lifetime_modifier := .5
+
 var player_facing_dir = Vector2.UP
 signal player_died
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var shot_sfx: AudioStreamPlayer2D = $ShotSFX
+@onready var pee_up_sfx: AudioStreamPlayer2D = $PeeUpSfx
 
 func _ready():
-	pass
+	add_to_group("player")
+
+#func _input(event):
+	#if event is InputEventMouseButton:
+		#if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			#if camera.zoom.x <= 6.5:
+				#camera.zoom.x += 0.5
+				#camera.zoom.y += 0.5
+			#
+		#if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			#if camera.zoom.x >= 2.5:
+				#camera.zoom.x -= 0.5
+				#camera.zoom.y -= 0.5
 
 func _physics_process(delta):
 	var input_dir = Vector2(
@@ -31,6 +53,7 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("shoot"):
 		shoot()
+
 	var look_dir
 	if Input.get_connected_joypads().size() > 0:
 		var aim_vector = Vector2.ZERO
@@ -52,6 +75,22 @@ func shoot():
 	var shot = shot_scene.instantiate()
 	shot_sfx.play()
 	shot.global_position = pp.global_position
+	
+	# apply color
+	match shot_color:
+		"orange":
+			shot.set_color(Color8(255, 125, 0, 200))
+		"yellow":
+			shot.set_color(Color8(255, 255, 0, 200))
+		"green":
+			shot.set_color(Color8(0.0, 125, 98, 200))
+		"purple":
+			shot.set_color(Color8(132, 30, 203, 200))
+	
+	# Apply player's current values
+	shot.pee_speed = pee_speed
+	shot.pee_lifetime *= pee_lifetime
+	
 	##shot.position = global_position + player_facing_dir * 20
 	shot.set_direction(player_facing_dir)
 	get_parent().add_child(shot)
@@ -63,6 +102,14 @@ func _on_body_entered(body):
 		print("Player collided with enemy!")
 		emit_signal("player_died")
 		queue_free()  # Remove player
+ 
+func apply_powerup(effect: String, color: String):		
+	pee_up_sfx.play(0.0)
+	if effect == "rate_up":
+		pee_speed += pee_speed_modifier
+	if effect == "distance_up":
+		pee_lifetime += pee_lifetime_modifier
+	shot_color = color
 
 func on_hit():
 	print("Enemy hit and removed:", name)
