@@ -10,8 +10,8 @@ var shot_color = Color8(255, 255, 0, 128)
 @export var pee_speed := 180.0
 @export var pee_lifetime := 0.4 # seconds
 
-var pee_speed_modifier := .25
-var pee_lifetime_modifier := .5
+var pee_speed_modifier := 1
+var pee_lifetime_modifier := 1
 
 var player_facing_dir = Vector2.UP
 signal player_died
@@ -73,7 +73,8 @@ func _physics_process(delta):
 
 func shoot():
 	var shot = shot_scene.instantiate()
-	shot_sfx.play()
+	if shot_sfx.playing == false:
+		shot_sfx.play()
 	shot.global_position = pp.global_position
 	
 	# apply color

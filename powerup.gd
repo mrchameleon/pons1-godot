@@ -29,13 +29,13 @@ func _ready():
 			pickup_label.text = "Dr. Pee Pee"
 		"yellow":
 			texture = preload("res://powerup_yellow.png")
-			pickup_label.text = "Tropical Redballs"
+			pickup_label.text = "Yellow Bull"
 		"green":
 			texture = preload("res://powerup_green.png")
 			pickup_label.text = "Baja Blast"
 		"purple":
 			texture = preload("res://powerup_purple.png")
-			pickup_label.text = "grape h2o"
+			pickup_label.text = "Purple Pebis"
 
 	sprite_2d.texture = texture
 	effect = EFFECTS.pick_random()
@@ -47,9 +47,9 @@ func _on_body_entered(body: Node):
 		sprite_2d.visible = false
 		if body.has_method("apply_powerup"):
 			body.apply_powerup(effect, color)
-		if effect == "rate_up":
-			show_pickup_message("PEE SPEED UP!")
-		if effect == "distance_up":
-			show_pickup_message("PEE DISTANCE UP!")
-		await get_tree().create_timer(0.5).timeout
+			if effect == "rate_up":
+				show_pickup_message("PEE SPEED UP!")
+			if effect == "distance_up":
+				show_pickup_message("PEE DISTANCE UP!")
+		await get_tree().create_timer(0.25).timeout
 		queue_free()
