@@ -20,17 +20,17 @@ curve = SubResource("Curve_7r54y")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7r54y"]
 lifetime_randomness = 0.78
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
 angle_min = -529.7
-angle_max = -140.7
+angle_max = 511.6
 inherit_velocity_ratio = 0.856
 spread = 180.0
 initial_velocity_min = 156.7
 initial_velocity_max = 346.36
 gravity = Vector3(0, 0, 0)
-radial_accel_min = -71.27
-radial_accel_max = 50.58
-scale_min = 0.3
-scale_max = 0.7
+radial_accel_min = 40.21
+radial_accel_max = 91.28
 scale_curve = SubResource("CurveTexture_cilva")
 color_ramp = SubResource("GradientTexture1D_cilva")
 

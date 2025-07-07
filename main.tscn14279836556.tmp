@@ -1,0 +1,250 @@
+[gd_scene load_steps=17 format=3 uid="uid://nty3c48bfm22"]
+
+[ext_resource type="Script" uid="uid://c5udyxgkg1xsx" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://bctfh62v0kqyh" path="res://shaders/background.gdshader" id="2_dg77c"]
+[ext_resource type="AudioStream" uid="uid://plbe0kswtfxi" path="res://oof.mp3" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cfyrfwr7xk188" path="res://poo.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://b758qp3chlnsg" path="res://player.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cmibh05g2dvwa" path="res://bloody_explosion.tscn" id="5_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dkun5tnsug6pu" path="res://enemy.tscn" id="5_7mycd"]
+[ext_resource type="AudioStream" uid="uid://8271u81hxml0" path="res://Boom14.wav" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://bexmnhgjp31tq" path="res://powerup.tscn" id="7_4c57u"]
+[ext_resource type="AudioStream" uid="uid://tkwsbokw0gal" path="res://music/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg" id="7_efxa6"]
+[ext_resource type="Shader" uid="uid://b4jdcipx8flwl" path="res://shaders/clouds.gdshader" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://crhwfxrdtth0w" path="res://debug.gd" id="12_dg77c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w48qg"]
+shader = ExtResource("2_dg77c")
+shader_parameter/color_cycle_speed = 1.0
+shader_parameter/scale = Vector2(0.25, 0.25)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/checkered_color = Color(0, 0, 0, 0.3)
+shader_parameter/coarse_grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/coarse_grid_line_width = Vector2(0.03, 0.03)
+shader_parameter/fine_grid_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/fine_grid_subdivisions = 1.0
+shader_parameter/fine_grid_line_width = Vector2(0.03, 0.03)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
+shader = ExtResource("10_4c57u")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(1, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+shader = ExtResource("10_4c57u")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(0.498039, 1, 1, 1)
+shader_parameter/colour_muiltiplier2 = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.35
+shader_parameter/clouds_resolution = 3.49
+shader_parameter/clouds_intesity = -0.01
+shader_parameter/waveyness = 3.1
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.5
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.54
+shader_parameter/blur2 = 0.01
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4c57u"]
+texture_repeat = 2
+
+[node name="Game" type="Node2D"]
+
+[node name="GameLogic" type="Node2D" parent="."]
+script = ExtResource("1_ig7tw")
+wave_shaders = Array[ShaderMaterial]([SubResource("ShaderMaterial_w48qg"), SubResource("ShaderMaterial_vivmo")])
+player_scene = ExtResource("4_lquwl")
+enemy_scene = ExtResource("5_7mycd")
+splat = ExtResource("4_272bh")
+blood_scene = ExtResource("5_5vw27")
+powerup_scene = ExtResource("7_4c57u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayAgain" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 243.0
+offset_right = 783.0
+offset_bottom = 386.0
+theme_override_font_sizes/font_size = 99
+text = "MO4R!!!!"
+
+[node name="MainText" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 164.0
+offset_right = 1128.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "PONS - Pee On Nazis Simulator"
+horizontal_alignment = 1
+
+[node name="InGameKills" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 9.0
+offset_right = 683.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 18
+text = "kills: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="wavedebug" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 8.0
+offset_right = 556.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 18
+text = "wave:"
+metadata/_edit_use_anchors_ = true
+
+[node name="lifedebug" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 54.0
+offset_right = 110.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 18
+text = "pee_range: "
+metadata/_edit_use_anchors_ = true
+
+[node name="ratedebug" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 79.0
+offset_right = 161.0
+offset_bottom = 124.0
+theme_override_font_sizes/font_size = 18
+text = "pee_rate"
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_efxa6")
+max_distance = 6000.0
+bus = &"Music"
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7mycd")
+volume_db = -5.85
+
+[node name="EnemyDie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7mycd")
+pitch_scale = 1.95
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="ColoredTilesBg" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.666667)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4c57u")
+offset_left = -1579.0
+offset_top = -1467.0
+offset_right = 3209.0
+offset_bottom = 2382.0
+texture = SubResource("CanvasTexture_4c57u")
+
+[node name="Debug" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("12_dg77c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Debug"]
+offset_left = 3.0
+offset_top = 155.0
+offset_right = 208.0
+offset_bottom = 195.0
+
+[node name="powerup_interval" type="HBoxContainer" parent="Debug/VBoxContainer"]
+layout_mode = 2
+
+[node name="powerup_interval_label" type="Label" parent="Debug/VBoxContainer/powerup_interval"]
+layout_mode = 2
+text = "powerup interval"
+
+[node name="powerup_interval_input" type="LineEdit" parent="Debug/VBoxContainer/powerup_interval"]
+layout_mode = 2
+
+[node name="wave_interval" type="HBoxContainer" parent="Debug/VBoxContainer"]
+layout_mode = 2
+
+[node name="wave_interval_label" type="Label" parent="Debug/VBoxContainer/wave_interval"]
+layout_mode = 2
+text = "wave interval"
+
+[node name="wave_interval_input" type="LineEdit" parent="Debug/VBoxContainer/wave_interval"]
+layout_mode = 2
+
+[node name="base_enemy_count" type="HBoxContainer" parent="Debug/VBoxContainer"]
+layout_mode = 2
+
+[node name="base_enemy_count_label" type="Label" parent="Debug/VBoxContainer/base_enemy_count"]
+layout_mode = 2
+text = "base enemy count"
+
+[node name="base_enemy_count_input" type="LineEdit" parent="Debug/VBoxContainer/base_enemy_count"]
+layout_mode = 2
+
+[node name="base_enemy_speed" type="HBoxContainer" parent="Debug/VBoxContainer"]
+layout_mode = 2
+
+[node name="base_enemy_speed_label" type="Label" parent="Debug/VBoxContainer/base_enemy_speed"]
+layout_mode = 2
+text = "base enemy speed"
+
+[node name="base_enemy_speed_input" type="LineEdit" parent="Debug/VBoxContainer/base_enemy_speed"]
+layout_mode = 2
+
+[node name="speed_increase_per_wave" type="HBoxContainer" parent="Debug/VBoxContainer"]
+layout_mode = 2
+
+[node name="speed_increase_per_wave_label" type="Label" parent="Debug/VBoxContainer/speed_increase_per_wave"]
+layout_mode = 2
+text = "speed increase per wave"
+
+[node name="speed_increase_per_wave_input" type="LineEdit" parent="Debug/VBoxContainer/speed_increase_per_wave"]
+layout_mode = 2
+
+[node name="Apply" type="Button" parent="Debug"]
+offset_left = 84.0
+offset_top = 339.0
+offset_right = 136.0
+offset_bottom = 370.0
+text = "Apply
+"
+
+[node name="Defaults" type="Button" parent="Debug"]
+offset_left = 84.0
+offset_top = 339.0
+offset_right = 136.0
+offset_bottom = 370.0
+text = "Defaults"
+
+[connection signal="pressed" from="Debug/Apply" to="Debug" method="_on_apply_pressed"]
+[connection signal="pressed" from="Debug/Defaults" to="GameLogic" method="_on_defaults_pressed"]

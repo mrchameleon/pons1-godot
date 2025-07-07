@@ -29,10 +29,10 @@ func _physics_process(delta):
 	if time_alive > pee_lifetime:
 		queue_free()
 	
-	position += direction * pee_speed * delta
+	global_position += direction * pee_speed * delta
 
 	# Remove shot if off screen
-	if not get_viewport_rect().has_point(position):
+	if player and global_position.distance_to(player.global_position) > 3000:
 		queue_free()
 
 func set_direction(dir: Vector2):

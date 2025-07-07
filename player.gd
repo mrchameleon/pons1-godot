@@ -23,17 +23,19 @@ signal player_died
 func _ready():
 	add_to_group("player")
 
-#func _input(event):
-	#if event is InputEventMouseButton:
-		#if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			#if camera.zoom.x <= 6.5:
-				#camera.zoom.x += 0.5
-				#camera.zoom.y += 0.5
-			#
-		#if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			#if camera.zoom.x >= 2.5:
-				#camera.zoom.x -= 0.5
-				#camera.zoom.y -= 0.5
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			if camera.zoom.x <= 1.6: 
+				camera.zoom.x += 0.2
+				camera.zoom.y += 0.2
+				#print(camera.zoom.x, camera.zoom.y)
+			
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			if camera.zoom.x >= 0.8:
+				camera.zoom.x -= 0.2
+				camera.zoom.y -= 0.2
+				#print(camera.zoom.x, camera.zoom.y)
 
 func _physics_process(delta):
 	var input_dir = Vector2(
@@ -76,6 +78,7 @@ func shoot():
 	if shot_sfx.playing == false:
 		shot_sfx.play()
 	shot.global_position = pp.global_position
+	shot.set_direction(player_facing_dir)
 	
 	# apply color
 	match shot_color:

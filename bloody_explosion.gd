@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var particles = $GPUParticles2D
+@onready var blood = $GPUParticles2D
 
 func _ready():
-	particles.restart()
-	await get_tree().create_timer(particles.lifetime + 0.5).timeout
+	blood.restart()
+	await get_tree().create_timer(blood.lifetime + 0.5).timeout
 	queue_free()

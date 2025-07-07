@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdtr3v75io8qh" path="res://nazi.png" id="1_7k104"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
-size = Vector2(26, 19)
+size = Vector2(26, 15)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -12,7 +12,7 @@ collision_mask = 12
 script = ExtResource("1_4gyqm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

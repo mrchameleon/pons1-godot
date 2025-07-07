@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b2qpkv4d5gcsb"
+path="res://.godot/imported/DavidKBD - Reckless Punk-Metal Pack - 04 - Get Ready.ogg-fef98447b507057a27e0d043d3c2ff49.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/DavidKBD - Reckless Punk-Metal Pack - 04 - Get Ready.ogg"
+dest_files=["res://.godot/imported/DavidKBD - Reckless Punk-Metal Pack - 04 - Get Ready.ogg-fef98447b507057a27e0d043d3c2ff49.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

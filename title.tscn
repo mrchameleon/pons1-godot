@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://swbacfmle6gi"]
 
 [ext_resource type="Texture2D" uid="uid://bq4djxhc3xcou" path="res://Title_Temp.png" id="1_y7k74"]
-[ext_resource type="AudioStream" uid="uid://bdysq5dui1drb" path="res://banner.mp3" id="2_oyqm6"]
+[ext_resource type="AudioStream" uid="uid://v2wmy5n3ni8o" path="res://music/DavidKBD - Reckless Punk-Metal Pack - 06 - Easy Money.ogg" id="2_oyqm6"]
 
 [sub_resource type="GDScript" id="GDScript_06r0y"]
 script/source = "extends Control

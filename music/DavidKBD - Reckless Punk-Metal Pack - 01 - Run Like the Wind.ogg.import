@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://tkwsbokw0gal"
+path="res://.godot/imported/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg-0c25d9ada5f35fa724825bf7cf1c7551.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg"
+dest_files=["res://.godot/imported/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg-0c25d9ada5f35fa724825bf7cf1c7551.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
