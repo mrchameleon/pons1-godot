@@ -195,32 +195,17 @@ offset_bottom = 260.0
 placeholder_text = "zerocool"
 
 [node name="L_Joy" parent="UI" instance=ExtResource("10_w48qg")]
-offset_left = 22.0
-offset_top = -169.0
-offset_right = 390.0
-offset_bottom = 199.0
-scale = Vector2(0.406756, 0.406756)
+offset_left = 30.0
+offset_top = -229.0
+offset_right = 398.0
+offset_bottom = 139.0
+scale = Vector2(0.532586, 0.532586)
 pressed_color = Color(0.635038, 0.807003, 0.51783, 1)
 visibility_mode = 1
 action_left = "move_left"
 action_right = "move_right"
 action_up = "move_up"
 action_down = "move_down"
-
-[node name="R_Joy" parent="UI" instance=ExtResource("10_w48qg")]
-visible = false
-offset_left = 974.0
-offset_top = -171.0
-offset_right = 1342.0
-offset_bottom = 197.0
-scale = Vector2(0.406756, 0.406756)
-pressed_color = Color(1, 1, 0, 1)
-clampzone_size = 36.0
-visibility_mode = 1
-action_left = "aim_left"
-action_right = "aim_right"
-action_up = "aim_up"
-action_down = "aim_down"
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_efxa6")
@@ -267,10 +252,10 @@ texture = SubResource("CanvasTexture_4c57u")
 
 [node name="BlackTint" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
-offset_left = -2329.0
-offset_top = -1349.0
-offset_right = 2810.0
-offset_bottom = 3208.0
+offset_left = -2323.0
+offset_top = -1376.0
+offset_right = 2816.0
+offset_bottom = 3181.0
 scale = Vector2(1.1242, 1)
 color = Color(0, 0, 0, 0.678431)
 

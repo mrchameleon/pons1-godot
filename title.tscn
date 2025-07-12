@@ -9,7 +9,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mom7w"]
 shader = ExtResource("2_mom7w")
 shader_parameter/resolution = Vector2(1152, 648)
+shader_parameter/octaves = 0
 shader_parameter/speed = 1.0
+shader_parameter/frequency = 1.0
+shader_parameter/amplitude = 1.0
+shader_parameter/time_shift = 1.0
+shader_parameter/zoom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7k74"]
 bg_color = Color(0, 0.556863, 0.54902, 0.0627451)
@@ -69,9 +74,9 @@ offset_bottom = 653.0
 text = "
 
 WASD - Move,  Left Click or Space to Pee.  
-Mousewheel: adjust zoom
 Joystick - Left analog move, R analog aim, RT: Pee) 
-F12 - Cheat/Debug/Difficulty Settings (Disables High Scores)"
+PC Only: Mousewheel: adjust zoom
+PC Only: F12 - Cheat/Debug/Difficulty Settings (Disables High Scores)"
 
 [node name="MusicCredit1" type="Label" parent="."]
 layout_mode = 0
@@ -106,7 +111,7 @@ scale_amount_max = 5.0
 color = Color(1, 1, 0.2, 1)
 
 [node name="static_pee" type="CPUParticles2D" parent="."]
-position = Vector2(456, 190)
+position = Vector2(351, 214)
 amount = 44
 lifetime = 6.34
 speed_scale = 0.8
@@ -119,7 +124,7 @@ scale_amount_max = 5.0
 color = Color(1, 1, 0.2, 1)
 
 [node name="static_pee2" type="CPUParticles2D" parent="."]
-position = Vector2(617, 182)
+position = Vector2(448, 215)
 amount = 44
 lifetime = 6.34
 speed_scale = 0.8
@@ -130,6 +135,31 @@ initial_velocity_max = 155.03
 scale_amount_min = 3.0
 scale_amount_max = 5.0
 color = Color(1, 0, 0.2, 1)
+
+[node name="static_pee3" type="CPUParticles2D" parent="."]
+position = Vector2(591, 214)
+amount = 44
+lifetime = 6.34
+speed_scale = 0.8
+randomness = 0.2
+spread = 85.0
+gravity = Vector2(0, 455)
+initial_velocity_max = 155.03
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+
+[node name="static_pee4" type="CPUParticles2D" parent="."]
+position = Vector2(915, 214)
+amount = 44
+lifetime = 6.34
+speed_scale = 0.8
+randomness = 0.2
+spread = 85.0
+gravity = Vector2(0, 455)
+initial_velocity_max = 155.03
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(0, 0.192157, 1, 1)
 
 [node name="PhraseOfTheDay" type="RichTextLabel" parent="."]
 layout_mode = 0

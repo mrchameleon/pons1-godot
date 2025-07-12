@@ -72,18 +72,29 @@ var player_profile = PlayerProfile.new()
 @onready var aim_joystick: VirtualJoystick = $"../UI/R_Joy"
 
 @onready var joystick_rect: Rect2 = joystick.get_global_rect()
-var active_touches := {}  # key: index, value: position
+var active_touches := {}  # index -> { pos = Vector2, in_joystick = bool }
+# All touchscreen touches, tagged with value in/out of joystick area
+
+func is_shoot_suppressed() -> bool:
+	#if OS.get_name() != "Android":
+		#return false  # Only suppress on mobile
+
+	if active_touches.is_empty():
+		return true  # No touches
+
+	for touch in active_touches.values():
+		if not touch["in_joystick"]:
+			return false  # At least one touch not in joystick
+	return true  # All touches are joystick-only
 
 
 func _process(delta):
-	joystick_rect = joystick.get_global_rect()
-	print(active_touches)
-	if active_touches.size() > 0:
-		Globals.joystick_pee_suppress = false
-	else:
-		if OS.get_name() == "Android":
-			Globals.joystick_pee_suppress = true
+	# NOTE: Turn on "enable_touch_from_mouse" for android debugging in windows
+	# ALSO turn it back OFF, before exporting the Windows Build!
 	
+	print(active_touches)
+	Globals.joystick_pee_suppress = is_shoot_suppressed()
+
 	if leader_name_entry.text != "":
 		leader_submit.disabled = false
 	
@@ -114,15 +125,17 @@ func _process(delta):
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed:
-			print(event.position)
-			var in_joystick = joystick.get_global_rect().has_point(event.position)
-			if not in_joystick:
-				active_touches[event.index] = event.position
+			var is_in_joystick = joystick.get_global_rect().has_point(event.position)
+			active_touches[event.index] = {
+				"pos": event.position,
+				"in_joystick": is_in_joystick
+			}
 		else:
 			active_touches.erase(event.index)
+
 	elif event is InputEventScreenDrag:
-		if not joystick.get_global_rect().has_point(event.position):
-			active_touches[event.index] = event.position
+		if active_touches.has(event.index):
+			active_touches[event.index]["pos"] = event.position
 
 	if event.is_action_pressed("any_button") and game_started == false:
 		start_game()
@@ -130,10 +143,6 @@ func _input(event):
 		if debug_panel.visible == true:
 			game_started = false
 		debug_panel.visible = !debug_panel.visible
-
-# Mobile debugging
-	for pos in active_touches.values():
-		draw_circle(pos, 10, Color.RED)
 
 func _ready():
 	Input.set_use_accumulated_input(false)
