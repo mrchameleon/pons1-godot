@@ -1,25 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://swbacfmle6gi"]
+[gd_scene load_steps=9 format=3 uid="uid://swbacfmle6gi"]
 
-[ext_resource type="Texture2D" uid="uid://bq4djxhc3xcou" path="res://Title_Temp.png" id="1_y7k74"]
+[ext_resource type="Script" uid="uid://cxp7sksmhoikg" path="res://scripts/title.gd" id="1_kpexm"]
+[ext_resource type="Texture2D" uid="uid://bvlp6s7o3hip" path="res://images/title_new.png" id="2_3xoar"]
+[ext_resource type="Shader" uid="uid://hoxvpsa27frg" path="res://shaders/plasma.gdshader" id="2_mom7w"]
 [ext_resource type="AudioStream" uid="uid://v2wmy5n3ni8o" path="res://music/DavidKBD - Reckless Punk-Metal Pack - 06 - Easy Money.ogg" id="2_oyqm6"]
+[ext_resource type="AudioStream" uid="uid://dtrnw6dqbojei" path="res://sounds/pee_up.wav" id="4_3xoar"]
 
-[sub_resource type="GDScript" id="GDScript_06r0y"]
-script/source = "extends Control
-
-signal play
-@onready var button: Button = $Button
-
-
-func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file(\"res://main.tscn\")
-
-func _input(event):
-	if event.is_action_pressed(\"any_button\"):
-		get_tree().change_scene_to_file(\"res://main.tscn\")
-"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mom7w"]
+shader = ExtResource("2_mom7w")
+shader_parameter/resolution = Vector2(1152, 648)
+shader_parameter/speed = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7k74"]
 bg_color = Color(0, 0.556863, 0.54902, 0.0627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xoar"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -28,40 +24,163 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_06r0y")
+script = ExtResource("1_kpexm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -41.0
-offset_right = 1226.0
-offset_bottom = 683.0
-texture = ExtResource("1_y7k74")
+offset_left = -1.0
+offset_right = 1150.0
+offset_bottom = 646.0
+texture = ExtResource("2_3xoar")
+expand_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mom7w")
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 644.0
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 468.0
-offset_top = 486.0
-offset_right = 723.0
-offset_bottom = 583.0
+offset_left = 451.0
+offset_top = 450.0
+offset_right = 706.0
+offset_bottom = 519.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_y7k74")
 
 [node name="Button" type="Button" parent="Panel"]
 layout_mode = 0
 offset_right = 252.0
-offset_bottom = 100.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 42
+text = "Pee"
 flat = true
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 508.0
-offset_top = 265.0
-offset_right = 633.0
-offset_bottom = 299.0
-theme_override_font_sizes/font_size = 24
-text = "DEMO v0.1"
 
 [node name="TitleSong" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_oyqm6")
 autoplay = true
 
+[node name="Help" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 485.0
+offset_right = 466.0
+offset_bottom = 653.0
+text = "
+
+WASD - Move,  Left Click or Space to Pee.  
+Mousewheel: adjust zoom
+Joystick - Left analog move, R analog aim, RT: Pee) 
+F12 - Cheat/Debug/Difficulty Settings (Disables High Scores)"
+
+[node name="MusicCredit1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 501.0
+offset_right = 1141.0
+offset_bottom = 550.0
+text = "Title Music: 
+DavidKBD - Easy Money"
+horizontal_alignment = 2
+
+[node name="MusicCredit2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 772.0
+offset_top = 564.0
+offset_right = 1145.0
+offset_bottom = 639.0
+text = "Game Music: 
+DavidKBD - Run Like The Wind
+davidkbd.itch.io"
+horizontal_alignment = 2
+
+[node name="pee" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.254902)
+amount = 1024
+lifetime = 30.0
+randomness = 0.42
+initial_velocity_min = 52.08
+initial_velocity_max = 145.83
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(1, 1, 0.2, 1)
+
+[node name="static_pee" type="CPUParticles2D" parent="."]
+position = Vector2(456, 190)
+amount = 44
+lifetime = 6.34
+speed_scale = 0.8
+randomness = 0.2
+spread = 85.0
+gravity = Vector2(0, 455)
+initial_velocity_max = 155.03
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(1, 1, 0.2, 1)
+
+[node name="static_pee2" type="CPUParticles2D" parent="."]
+position = Vector2(617, 182)
+amount = 44
+lifetime = 6.34
+speed_scale = 0.8
+randomness = 0.2
+spread = 85.0
+gravity = Vector2(0, 455)
+initial_velocity_max = 155.03
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(1, 0, 0.2, 1)
+
+[node name="PhraseOfTheDay" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 378.0
+offset_right = 1119.0
+offset_bottom = 418.0
+theme_override_font_sizes/normal_font_size = 18
+text = "The proof is in the pudding!"
+horizontal_alignment = 1
+
+[node name="PhraseButton" type="Button" parent="PhraseOfTheDay"]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 1081.0
+offset_bottom = 33.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_3xoar")
+flat = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3xoar")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 232.0
+offset_bottom = 30.0
+text = "Professional Pissers"
+
+[node name="pissers" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 36.0
+offset_right = 275.0
+offset_bottom = 292.0
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1074.0
+offset_top = 5.0
+offset_right = 1168.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 10
+text = "dev build v0.1"
+
 [connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PhraseOfTheDay/PhraseButton" to="." method="_on_phrase_button_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

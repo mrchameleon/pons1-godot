@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://b758qp3chlnsg"]
 
-[ext_resource type="Texture2D" uid="uid://c0ycpsqbughvp" path="res://player.png" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://c0ycpsqbughvp" path="res://images/player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://ytebi1hoofde" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://dnwll1xb8jtvt" path="res://shot.tscn" id="2_i3pqv"]
-[ext_resource type="AudioStream" uid="uid://dtgufigom5qx7" path="res://pee.wav" id="4_sweqy"]
-[ext_resource type="AudioStream" uid="uid://dtrnw6dqbojei" path="res://pee_up.wav" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://dtgufigom5qx7" path="res://sounds/pee.wav" id="4_sweqy"]
+[ext_resource type="AudioStream" uid="uid://dtrnw6dqbojei" path="res://sounds/pee_up.wav" id="5_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
-size = Vector2(34, 14)
+size = Vector2(35, 21)
 
 [node name="Player" type="CharacterBody2D"]
 top_level = true
@@ -22,15 +22,15 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(2.5, -1.5)
 shape = SubResource("RectangleShape2D_4flbx")
 
 [node name="PP" type="Marker2D" parent="."]
-position = Vector2(2, -12)
+position = Vector2(2, -9)
 
 [node name="ShotSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_sweqy")
-volume_db = 6.5
+volume_db = 9.0
 
 [node name="PeeUpSfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_sweqy")

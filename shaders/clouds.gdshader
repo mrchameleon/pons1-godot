@@ -7,8 +7,8 @@ uniform float timeScaleFactor = .04;
 // Make sure to use a seamless noise texture
 uniform sampler2D noise_texture: repeat_enable, filter_linear;
 
-uniform vec4 colour_muiltiplier: source_color = vec4(1.0,1.0,1.0,1.0);
-uniform vec4 colour_muiltiplier2: source_color = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 colour_multiplier: source_color = vec4(1.0,1.0,1.0,1.0);
+uniform vec4 colour_multiplier2: source_color = vec4(1.0,1.0,1.0,1.0);
 
 uniform float brightness: hint_range(0.0, 3.0, 0.01) = 1.0;
 uniform float clouds_resolution: hint_range(0.0, 10.0, 0.01) = 3.0;
@@ -113,10 +113,10 @@ void fragment() {
 	}
 
 	if (stars_on) {
-		COLOR = vec4((col + stars) * colour_muiltiplier.rgb, 1.0) * colour_muiltiplier2;
+		COLOR = vec4((col + stars) * colour_multiplier.rgb, 0.8) * colour_multiplier2;
 	}
 	else {
-		COLOR = vec4((col) * colour_muiltiplier.rgb, 1.0) * colour_muiltiplier2;
+		COLOR = vec4((col) * colour_multiplier.rgb, 0.8) * colour_multiplier2;
 	}
 
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bexmnhgjp31tq"]
 
-[ext_resource type="Script" uid="uid://blwpa2yuo7gvt" path="res://powerup.gd" id="1_wh0le"]
-[ext_resource type="Texture2D" uid="uid://kq0ajubsap2t" path="res://powerup_yellow.png" id="2_wh0le"]
+[ext_resource type="Script" uid="uid://blwpa2yuo7gvt" path="res://scripts/powerup.gd" id="1_wh0le"]
+[ext_resource type="Texture2D" uid="uid://kq0ajubsap2t" path="res://images/powerup_yellow.png" id="2_wh0le"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wh0le"]
 size = Vector2(11, 18)

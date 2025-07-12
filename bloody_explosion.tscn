@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cmibh05g2dvwa"]
 
-[ext_resource type="Script" uid="uid://cvvxl6j8j1l5f" path="res://bloody_explosion.gd" id="1_180eu"]
-[ext_resource type="Texture2D" uid="uid://ck8lwqv5lh7yj" path="res://blood.jpg" id="2_7r54y"]
+[ext_resource type="Script" uid="uid://cvvxl6j8j1l5f" path="res://scripts/bloody_explosion.gd" id="1_180eu"]
+[ext_resource type="Texture2D" uid="uid://ck8lwqv5lh7yj" path="res://images/blood.jpg" id="2_7r54y"]
 
 [sub_resource type="Gradient" id="Gradient_7r54y"]
 offsets = PackedFloat32Array(0, 0.503788, 1)

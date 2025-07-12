@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dnwll1xb8jtvt"]
 
-[ext_resource type="Script" uid="uid://djnq4p8etlm87" path="res://shot.gd" id="1_3ldfn"]
-[ext_resource type="Texture2D" uid="uid://fg3qrpipteix" path="res://pee.png" id="1_awion"]
-[ext_resource type="AudioStream" uid="uid://8271u81hxml0" path="res://Boom14.wav" id="3_f4qg3"]
+[ext_resource type="Script" uid="uid://djnq4p8etlm87" path="res://scripts/shot.gd" id="1_3ldfn"]
+[ext_resource type="Texture2D" uid="uid://fg3qrpipteix" path="res://images/pee.png" id="1_awion"]
+[ext_resource type="AudioStream" uid="uid://8271u81hxml0" path="res://sounds/Boom14.wav" id="3_f4qg3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ldfn"]
 radius = 2.23607

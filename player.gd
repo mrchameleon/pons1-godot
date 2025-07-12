@@ -7,14 +7,20 @@ extends CharacterBody2D
 var shot_color = Color8(255, 255, 0, 128)
 @onready var camera: Camera2D = $Camera2D
 
-@export var pee_speed := 180.0
-@export var pee_lifetime := 0.4 # seconds
+# firing/pee container
+var pee_level = Globals.pee_container_max
+var pee_cooldown = 0.1
+var pee_timer = 0.0
 
-var pee_speed_modifier := 1
-var pee_lifetime_modifier := 1
+var pee_speed = Globals.base_pee_speed
+var pee_lifetime = Globals.base_pee_life
+var pee_speed_modifier = Globals.powerup_pee_speed_modifier
+var pee_lifetime_modifier = Globals.powerup_pee_lifetime_modifier
 
 var player_facing_dir = Vector2.UP
+
 signal player_died
+signal pee_changed(current: float, max: float)
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var shot_sfx: AudioStreamPlayer2D = $ShotSFX
@@ -26,13 +32,13 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
-			if camera.zoom.x <= 1.6: 
+			if camera.zoom.x <= 1.8: 
 				camera.zoom.x += 0.2
 				camera.zoom.y += 0.2
 				#print(camera.zoom.x, camera.zoom.y)
 			
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
-			if camera.zoom.x >= 0.8:
+			if camera.zoom.x >= 0.6:
 				camera.zoom.x -= 0.2
 				camera.zoom.y -= 0.2
 				#print(camera.zoom.x, camera.zoom.y)
@@ -53,8 +59,27 @@ func _physics_process(delta):
 			emit_signal("player_died")
 			queue_free()
 
+	# peeing
+	pee_timer -= delta
+	print("Input shoot : %s" % Input.is_action_pressed("shoot"))
+	print("pee suppress: %s" % Globals.joystick_pee_suppress)
+	if Input.is_action_pressed("shoot") and Globals.joystick_pee_suppress == false:
+		if pee_level >= Globals.pee_cost_per_shot and pee_timer <= 0:
+			shoot()
+			pee_level -= Globals.pee_cost_per_shot
+			pee_timer = pee_cooldown
+			emit_signal("pee_changed", pee_level, Globals.pee_container_max)
+		else:
+			pee_timer = 0.0
+			
+	# pee regeneration
 	if Input.is_action_pressed("shoot"):
-		shoot()
+		pee_level += Globals.pee_regen_during_shoot * delta
+	else:
+		pee_level += Globals.pee_regen_rate * delta
+
+	pee_level = clamp(pee_level, 0.0, Globals.pee_container_max)
+	emit_signal("pee_changed", pee_level, Globals.pee_container_max)
 
 	var look_dir
 	if Input.get_connected_joypads().size() > 0:
@@ -107,12 +132,24 @@ func _on_body_entered(body):
 		emit_signal("player_died")
 		queue_free()  # Remove player
  
-func apply_powerup(effect: String, color: String):		
+func apply_powerup(effect: String, color: String):
+	Globals.powerups_used += 1
 	pee_up_sfx.play(0.0)
+	
+
+	
+	if color == "blue":
+		pee_level = Globals.pee_container_max
+	else:
+		pee_level += 1000
+	emit_signal("pee_changed", pee_level, Globals.pee_container_max)
+	
 	if effect == "rate_up":
 		pee_speed += pee_speed_modifier
 	if effect == "distance_up":
 		pee_lifetime += pee_lifetime_modifier
+	if effect == "player_speed_up":
+		speed += 2
 	shot_color = color
 
 func on_hit():
